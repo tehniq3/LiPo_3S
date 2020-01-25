@@ -9,7 +9,7 @@ http://arduino.cc/en/Tutorial/AnalogInput
 /* original circuit made by niq_ro from http://www.tehnic.go.ro
 http://nicuflorica.blogspot.ro/
 http://arduinotehniq.blogspot.com/
-1) uC: ATtiny85 (ATtiny45) at 1MHz (internal clock)
+1) uC: ATtiny85 (ATtiny45) at 8MHz (internal clock)
 2) common chatode RGB LED code OSTA5131A-C, see http://nicuflorica.blogspot.ro/2012/12/arduino-uno-si-un-led-multicolor-rgb.html
 - an 180ohms resistor at pin D0 (phisical pin 5) in series with RED LED at GND
 - an 100ohms resistor at pin D1 (phisical pin 6) in series with GREN LED at GND
