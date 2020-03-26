@@ -1,3 +1,4 @@
+// https://nicuflorica.blogspot.com/2020/01/tester-pentru-baterie-lipo-3s.html
 // original http://nicuflorica.blogspot.com/2015/01/indicator-stare-acumulator-auto-cu-led.html
 
 /*
@@ -18,41 +19,62 @@ http://arduinotehniq.blogspot.com/
 - for tests can use an 10-50kohms variabile resistor put at +5V and GND, midle at A2 (phisical pin 3)
 4) Vcc (phisical pin 8) at 5V
 5) GND (phisixcal pin 4) at GND
-
 program written by Nicu FLORICA (niq_ro) for Lidiano Marcassa
-
 */
 
+/*  // ATtiny85/45
 #define sensorPin A2   // select the input pin for the potentiometer / resistor divider
 int ledRPin = 0;      // select the pin for the RED LED
 int ledGPin = 1;      // select the pin for the GREEN LED
 int ledBPin = 2;      // select the pin for the BLUE LED
+*/
+
+  // Arduino
+#define sensorPin A2   // select the input pin for the potentiometer / resistor divider
+int ledRPin = 8;      // select the pin for the RED LED
+int ledGPin = 9;      // select the pin for the GREEN LED
+int ledBPin = 10;      // select the pin for the BLUE LED
+
 
 int u = 0;  // variable to store the value coming from the sensor
+int um = 0;  // sum
+int numar = 0; // number
 
-float k=4.99/5.; // corection voltage ("real 5V" / 5V)
+float u0, u1, ux;
+
+float k0 = 1.016;  // correction for resistive divider
+float k=(float)4.88/5.; // corection voltage ("real 5V" / 5V)
 // define voltage steps (treapta = 1023 * voltage_threshold /20)
-int treapta1 = 624/k;       // Ubat=12,2V (100%) 
-int treapta2 = 593/k;       // 95%
-int treapta3 = 562/k;       // 90%
-int treapta4 = 499/k;       // 80%
-int treapta5 = 468/k;       // 75%
-int histerezis = 3;         // for eliminate flash changes
+/*
+int treapta1 = 624;       // Ubat=12,2V (100%) 
+int treapta2 = 593;       // 95%
+int treapta3 = 562;       // 90%
+int treapta4 = 499;       // 80%
+int treapta5 = 468;       // 75%
+*/
+int treapta1 = 624;       // Ubat=12,2V (100%) 
+int treapta2 = 0.95*treapta1;       // 95%
+int treapta3 = 0.9*treapta1;       // 90%
+int treapta4 = 0.8*treapta1;      // 80%
+int treapta5 = 0.75*treapta1;        // 75%
+
+int histerezis = 2;         // for eliminate flash changes
 int pauza = 500;           // brake between measurements
 int pauza2 = 300;           // time in ms for red flash (on/off)
-
-
+int citiri = 50;          // number of measurements
+/*
 // Coomon Anode
 byte stins = 1;
 byte aprins = 0;
+*/
 
-/*
 // Comon Cathode
 byte stins = 0;
 byte aprins = 1;
-*/
+
 
 void setup() {
+  Serial.begin(9600);
   // declare the ledPins as an OUTPUT:
   pinMode(ledRPin, OUTPUT);  
   pinMode(ledGPin, OUTPUT);
@@ -67,20 +89,36 @@ void setup() {
 void loop() {
 /*
   // all leds are off
-    digitalWrite(ledRPin, stins;    // turn the red led off
+    digitalWrite(ledRPin, stins);    // turn the red led off
     digitalWrite(ledGPin, stins);    // turn the green led off
     digitalWrite(ledBPin, stins);    // turn the blue led off
-*/ 
+*/
   
   // read the value from the sensor:
-  u = analogRead(sensorPin);    
+  um = 0;
+  for (int i = 0; i < citiri; i++) 
+  {
+  u = (float)(k0 * k *analogRead(sensorPin));  
+  delay(10);
+  um = um + u;
+  }
+  ux = (float)(um/citiri);
+  u0 = (float)(ux * 5. / 1024); // voltage on uC pin
+  u1 = (float)(4. *  u0 );
+  Serial.print("step = ");
+  Serial.print(u);
+  Serial.print("/1024 = ");
+  Serial.print(u1);
+  Serial.println("V");  
 
+   
 // voltage below 75% -> flash RED
 if (u < treapta5)
 {
   digitalWrite(ledRPin, aprins);
   digitalWrite(ledGPin, stins);
   digitalWrite(ledBPin, stins);
+  Serial.println("<75% = <9.2V ===> R");
   delay(pauza2);
   digitalWrite(ledRPin, stins);
   digitalWrite(ledGPin, stins);
@@ -94,6 +132,7 @@ if (u >= treapta5 && u < treapta4-histerezis)
   digitalWrite(ledRPin, aprins);
   digitalWrite(ledGPin, aprins);
   digitalWrite(ledBPin, stins);
+  Serial.println("75..80% = 9.2..9.8V ===> R+G");
   delay(pauza);
 }
 
@@ -104,6 +143,7 @@ if (u >= treapta4 && u < treapta3-histerezis)
   digitalWrite(ledRPin, stins);
   digitalWrite(ledGPin, aprins);
   digitalWrite(ledBPin, stins);
+  Serial.println("80..90% = 9.8..11.0V ===> G");
   delay(pauza);
 }
 
@@ -114,6 +154,7 @@ if (u >= treapta3 && u < treapta2-histerezis)
   digitalWrite(ledRPin, stins);
   digitalWrite(ledGPin, aprins);
   digitalWrite(ledBPin, aprins);
+  Serial.println("90..95% = 11.0..11.6V ===> B+G");
   delay(pauza);
 }
 
@@ -123,6 +164,7 @@ if (u >= treapta2 && u <= treapta1-histerezis)
   digitalWrite(ledRPin, stins);
   digitalWrite(ledGPin, stins);
   digitalWrite(ledBPin, aprins);
+  Serial.println("95..100% = 11.6..12.2V ===> B");
   delay(pauza);
 }
 
@@ -132,6 +174,7 @@ if (u > treapta1)
   digitalWrite(ledRPin, aprins);
   digitalWrite(ledGPin, stins);
   digitalWrite(ledBPin, aprins);
+  Serial.println(">100% = 12.2V ===> R+B");
   /*
   delay(300);
   digitalWrite(ledRPin, stins);
