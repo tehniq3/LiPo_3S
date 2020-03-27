@@ -11,7 +11,7 @@ articles:
 other info: https://nicuflorica.blogspot.com/2015/01/programarea-unui-microcontroler.html
 
 
-![schematic](https://1.bp.blogspot.com/-Je38mytCokU/Xi1Tucjum6I/AAAAAAAAbPw/nI-MfzkcVUQWONh7pCnVWuCtqPfLDH5vACLcBGAsYHQ/s1600/schematic.png)
+![schematic](https://1.bp.blogspot.com/-Je38mytCokU/Xi1Tucjum6I/AAAAAAAAbPw/nI-MfzkcVUQWONh7pCnVWuCtqPfLDH5vACLcBGAsYHQ/s320/schematic.png)
 
 ![schematic2](https://1.bp.blogspot.com/-6pfj45JWtIc/Xn3eA7714LI/AAAAAAAAbrs/29ofrqcdxQoIouE2bbaJIqE3knSqoZTzQCLcBGAsYHQ/s320/LiPo_2S_schemtic.png)
 
