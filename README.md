@@ -13,6 +13,8 @@ other info: https://nicuflorica.blogspot.com/2015/01/programarea-unui-microcontr
 
 ![schematic](https://1.bp.blogspot.com/-Je38mytCokU/Xi1Tucjum6I/AAAAAAAAbPw/nI-MfzkcVUQWONh7pCnVWuCtqPfLDH5vACLcBGAsYHQ/s1600/schematic.png)
 
+![schematic2](https://1.bp.blogspot.com/-6pfj45JWtIc/Xn3eA7714LI/AAAAAAAAbrs/29ofrqcdxQoIouE2bbaJIqE3knSqoZTzQCLcBGAsYHQ/s320/LiPo_2S_schemtic.png)
+
 ![ok](https://1.bp.blogspot.com/-jUAa5PNZuTs/XiwRoKpI8TI/AAAAAAAAbO4/Ph38yIJQRTUChfTnsy6mGo9enj_MQqGpACLcBGAsYHQ/s1600/IMG_1912.jpeg)
 
 ![table](https://1.bp.blogspot.com/-uzqr8eUyIkU/Xn3k4_3chGI/AAAAAAAAbsU/Y3TBR1LW6u4xxy4n7rSBxRD4tgpWbH6cgCLcBGAsYHQ/s320/2S_3S.png)
