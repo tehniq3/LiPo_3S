@@ -8,6 +8,8 @@ articles:
 
 - https://nicuflorica.blogspot.com/2020/03/tester-pentru-acumulatori-lipo-2s-sau-3s.html
 
+- https://nicuflorica.blogspot.com/2020/03/tester-automat-pentru-acumulatori-lipo.html
+
 other info: https://nicuflorica.blogspot.com/2015/01/programarea-unui-microcontroler.html
 
 
